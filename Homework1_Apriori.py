@@ -46,11 +46,13 @@ def getLoser(k, min_sup) :
             List.append(items[i])
     return List
 
+
+starttime = time.time() 
 min_sup = 0.01
-initial = Apriori(min_sup, 'c:/Users/amychang0122/Desktop/Lectures/Data Mining/Project 1/data.data')
+initial = Apriori(min_sup, 'c:/Users/amychang0122/Desktop/Lectures/Data Mining/Project 1/IBM.data')
 #initial.process()   # initial.data = 資料集
 n=1
-data_num = 20
+data_num = 100000
 C = []#initial.scan()
 Supp = []
 items = []
@@ -131,13 +133,14 @@ while len(L)!=0 :
     lv = 1
     while lv < n :
         loser = getLoser(lv, min_sup)
-        for item in DB :
+        for item in DB :    ## DB = 還未掃描過的候選人
             for each in loser :
                 flag = False
                 if e not in each :
                     flag = True
                 if flag == False :
-                    DB.remove(item)
+                    if item in DB :
+                        DB.remove(item)
         lv = lv + 1
     C = DB
     L = []
@@ -157,6 +160,6 @@ while len(L)!=0 :
         if sup >= min_sup : 
             L.append(i)  
 
-
-
+endtime =  time.time() 
+print("It takes %d milliseconds to find the above patterns" %((endtime-starttime) * 1000))
 

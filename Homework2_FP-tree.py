@@ -4,6 +4,7 @@ import sys
 import numpy as np
 import itertools
 import csv
+import time
 
 class Apriori:
     def __init__(self,min_supp=0.5,datafile='Book_data'):
@@ -37,11 +38,6 @@ class Apriori:
                 arr[int(j)] += 1
                 if maximum < arr[int(j)] :
                     maximum = arr[int(j)]
-
-#        for each_set in range(len(self.data)) :
-#            for e in range(len(self.data[each_set])) :
-#                for tar in range(e+1, len(self.data[each_set])) :
-#                    break
         for src in self.data :
             src.sort()
             for i in range(min_sup,maximum+1) :
@@ -52,10 +48,10 @@ class Apriori:
             List.append(temp)
             temp = []
 
-        for each in List :
-            print(each)
+##        for each in List :
+##            print(each)
         self.data = List
-        print(self.data)
+##        print(self.data)
         return arr
 ####  sort-完畢
 
@@ -89,12 +85,11 @@ class Tree(object):
         self.num = n
 
     
-#You can use it like this:
 
-
-inputFile = 'c:/Users/amychang0122/Desktop/Lectures/Data Mining/Project 1/book_data2.txt'
+starttime = time.time()
+inputFile = 'c:/Users/amychang0122/Desktop/Lectures/Data Mining/Project 1/IBM.data'
 min_sup = 3 # unsigned int
-data_num = 30
+data_num = 100000
 array = np.zeros(1000000, int)
 initial = Apriori(min_sup, inputFile)
 array = initial.sort(min_sup)
@@ -115,6 +110,8 @@ root_tail = None
 temp = Tree()
 
 for each_src in initial.data :
+    if len(each_src) == 0 :
+        continue
     if each_src[0] not in root_list :   # new itemset 
         root_list.append(each_src[0])
         if root_tail == None :  #最初最初的資料進來囉
@@ -189,7 +186,7 @@ for each_src in initial.data :
                 current = temp ###ADDD
                 #current.sibling = temp
                 string += str(temp.data) + "(" + str(temp.num) + ") __ "
-    print("Produce: ", string)
+#    print("Produce: ", string)
     string = ""
 # FP-Tree 建置完畢
 
@@ -339,3 +336,6 @@ while scan != root :
             print("------------------------ \nConditional FP-tree = ", output)
             output = str(current.data) + "\t" 
     
+
+endtime =  time.time() 
+print("It takes %d milliseconds to find the above patterns" %((endtime-starttime) * 1000))
