@@ -3,6 +3,7 @@ import copy
 import sys
 import numpy as np
 import itertools
+import csv
 
 class Apriori:
     def __init__(self,min_supp=0.5,datafile='Book_data'):
@@ -91,13 +92,13 @@ class Tree(object):
 #You can use it like this:
 
 
-
+inputFile = 'c:/Users/amychang0122/Desktop/Lectures/Data Mining/Project 1/book_data2.txt'
 min_sup = 3 # unsigned int
+data_num = 30
 array = np.zeros(1000000, int)
-initial = Apriori(min_sup, 'c:/Users/amychang0122/Desktop/Lectures/Data Mining/Project 1/data.data')
+initial = Apriori(min_sup, inputFile)
 array = initial.sort(min_sup)
 #initial.process()   # initial.data = 資料集
-
 
 root = Tree()
 root.parent = "NULL"

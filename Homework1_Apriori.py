@@ -2,7 +2,7 @@
 import copy
 import re
 import time
-
+import csv
 class Apriori:
     def __init__(self,min_supp=0.5,datafile='Book_data'):
         inputfile = open(datafile,"r")
@@ -50,6 +50,7 @@ min_sup = 0.01
 initial = Apriori(min_sup, 'c:/Users/amychang0122/Desktop/Lectures/Data Mining/Project 1/data.data')
 #initial.process()   # initial.data = 資料集
 n=1
+data_num = 20
 C = []#initial.scan()
 Supp = []
 items = []
@@ -77,6 +78,30 @@ for each_src in initial.data:
 
 L = C
 L.sort()
+
+'''# output testing data
+topic = ['Transation']
+for i in range(1, data_num) :
+    topic.append(i)
+ # 輸出成csv檔
+with open('Output_Testing_Data.csv', 'w', newline='') as csvfile:  # 建立 CSV 檔寫入器
+    writer = csv.writer(csvfile)
+    writer.writerow(topic)
+    for each in initial.data:
+        topic.clear()
+        now = 0
+        for i in range(data_num) :
+#            print("(", int(each[now]), ",", i, ")")
+            if now >= len(each) :
+                topic.append('0')
+            elif int(each[now]) == i :
+                topic.append('1')
+                now += 1
+            else :
+                topic.append('0')
+            
+        writer.writerow(topic)
+'''
 
 while len(L)!=0 :
     print("\n{", n, "- itemset} :", len(L))
