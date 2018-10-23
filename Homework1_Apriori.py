@@ -49,7 +49,7 @@ def getLoser(k, min_sup) :
 
 starttime = time.time() 
 min_sup = 0.01
-initial = Apriori(min_sup, 'c:/Users/amychang0122/Desktop/Lectures/Data Mining/Project 1/IBM.data')
+initial = Apriori(min_sup, 'c:/Users/amychang0122/Desktop/Lectures/Data Mining/Project 1/book_data2.txt')
 #initial.process()   # initial.data = 資料集
 n=1
 data_num = 100000
@@ -104,7 +104,8 @@ with open('Output_Testing_Data.csv', 'w', newline='') as csvfile:  # 建立 CSV 
             
         writer.writerow(topic)
 '''
-
+if len(L) == 0 :
+    print("Empty")
 while len(L)!=0 :
     print("\n{", n, "- itemset} :", len(L))
     print("------------------------------\n", getWinner(n, min_sup), "\n")

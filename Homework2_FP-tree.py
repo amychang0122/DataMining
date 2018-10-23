@@ -87,7 +87,7 @@ class Tree(object):
     
 
 starttime = time.time()
-inputFile = 'c:/Users/amychang0122/Desktop/Lectures/Data Mining/Project 1/IBM.data'
+inputFile = 'c:/Users/amychang0122/Desktop/Lectures/Data Mining/Project 1/book_data2.txt'
 min_sup = 3 # unsigned int
 data_num = 100000
 array = np.zeros(1000000, int)
